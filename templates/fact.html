@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Latest compiled and minified JavaScript -->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,28 +9,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <h1>Cat Fact!</h1>
+<body style="height: 100vh;">
+    <div class="container text-center" style="height: 100%;">
+        <div class="vertical-center">
+            <div class="row">
+                <h1>Cat Fact!</h1>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <img id="cat-img" style="max-height:40vh" src="{{ cat_image.url }}" class="img-responsive center-block" alt="">
+                <small><i>image is not related to the fact</i></small>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="row py-5">
+                <p class=" lead">
+                    <i id="cat-fact">
+                        {{ cat_fact.text }}
+                    </i>
+                </p>
+                <button id="btn-fact" class="btn btn-primary">Gimme new fact!</button>
+            </div>
         </div>
-
-        <div class="col-md-12">
-            <p>
-                <img style="width: 50%;" src="{{ cat_image.url }}" class="img-responsive" alt="">
-            </p>
-        </div>
-        
-        <div class="col-md-12">
-                {% for breed in cat_breeds %}
-                    <div class="breed row">
-                        {{ breed.name }}
-                    </div>
-                {% endfor %}
-        </div>
-
     </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $("#btn-fact").click(function() {
+            $.get("https://cat-fact.herokuapp.com/facts/random?animal_type=cat",  data => {
+                $("#cat-fact").text(data.text)
+            });
+        });
+
+        $("#cat-img").click(function() {
+            $.ajaxSetup({
+                headers: {"x-api-key": "9d3b38de-757e-41ca-b77a-603d16f52442"
+            }});
+            $.get("https://api.thecatapi.com/v1/images/search",  data => {
+                $("#cat-img").attr("src", data[0].url);
+            });
+        })
+
+    </script>
 </body>
 </html>
