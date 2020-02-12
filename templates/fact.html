@@ -10,28 +10,45 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body style="height: 100vh;">
+    <style>
+        .center_div{
+            margin: 0 auto;
+        }
+    </style>
+
     <div class="container text-center" style="height: 100%;">
         <div class="vertical-center">
             <div class="row">
-                <h1>Cat Fact!</h1>
+                <h1>Animal Fact!</h1>
             </div>
             <br>
             <br>
             <div class="row">
                 <img id="cat-img" style="max-height:40vh" src="{{ cat_image.url }}" class="img-responsive center-block" alt="">
-                <small><i>image is not related to the fact</i></small>
+                <small><i><b>(image is not related to the fact)</b></i></small>
             </div>
             <br>
             <br>
             <br>
-            <div class="row py-5">
-                <p class=" lead">
-                    <i id="cat-fact">
-                        {{ cat_fact.text }}
-                    </i>
-                </p>
-                <button id="btn-fact" class="btn btn-primary">Gimme new fact!</button>
-            </div>
+            {% if error %}
+                <div class="row py-5">
+                    <p class=" lead">
+                        We can't search fact for: <b>{{ animal }}</b>
+                    </p>
+                </div>
+            {% else %}
+                <div class="row py-5">
+                    <p class=" lead">
+                        <i id="cat-fact" class="text-center">
+                            {{ cat_fact.text }}
+                            <form action="/" method="POST" class="center_div">
+                                <input style="width:50%;" type="text" class="" name="animal" placeholder="enter name of animal, e.g: horse">
+                                <button type="submit" id="btn-fact" class="btn btn-primary">Gimme new fact!</button>
+                            </form>
+                        </i>
+                    </p>
+                </div>
+            {% endif %}
         </div>
     </div>
 
