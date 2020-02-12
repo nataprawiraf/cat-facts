@@ -34,4 +34,4 @@ def index():
 # cat_breeds = requests.get('https://api.thecatapi.com/v1/breeds', 
 #             headers={"x-api-key":"9d3b38de-757e-41ca-b77a-603d16f52442"}).json()
 if __name__=='__main__':
-    app.run(host='0.0.0.0', port=20800, debug=True)
+    app.run(host='0.0.0.0', port=20581, debug=True)

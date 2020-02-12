@@ -35,6 +35,11 @@
                     <p class=" lead">
                         We can't search fact for: <b>{{ animal }}</b>
                     </p>
+
+                    <form action="/" method="POST" class="center_div">
+                        <input style="width:50%;" type="text" class="" name="animal" placeholder="enter name of animal, e.g: horse">
+                        <button type="submit" id="btn-fact" class="btn btn-primary">Gimme new fact!</button>
+                    </form>
                 </div>
             {% else %}
                 <div class="row py-5">
